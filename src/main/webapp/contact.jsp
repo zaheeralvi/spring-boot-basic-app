@@ -1,6 +1,7 @@
 <a href="/">Home</a>
 <a href="/about">About</a>
 <a href="/contact">Contact</a>
+<a href="/all">All users</a>
 <br><br>
 
 <form role="form" method="post" action="/welcome">

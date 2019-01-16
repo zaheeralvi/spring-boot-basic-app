@@ -52,11 +52,7 @@ public class starter{
 	@RequestMapping(path="/all")
 	public String getAllUsers(HttpServletRequest request,Model model) {
 		Iterable<user> user =userRepository.findAll();
-//		ArrayList<user> user_list = new ArrayList<user>();
-//		
-//		for (user i : user) {
-//			user_list.add(i);
-//		}
+
 		model.addAttribute("userlist",user);
 		return "users.jsp";
 	}
