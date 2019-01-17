@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class starter{
 	
@@ -55,6 +56,24 @@ public class starter{
 
 		model.addAttribute("userlist",user);
 		return "users.jsp";
+	}
+	
+	@RequestMapping("/add")
+	@ResponseBody
+	public String add(HttpServletRequest request) throws Exception {
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+		String country = request.getParameter("country");
+		try {
+		user n = new user();
+		n.setName(name);
+		n.setEmail(email);
+		n.setCountry(country);
+		userRepository.save(n);
+		return "Successfully added new user ";
+		}catch(Exception e) {
+			throw new Exception(e);
+		}
 	}
 	
 }
