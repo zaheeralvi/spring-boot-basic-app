@@ -3,4 +3,4 @@
 <a href="/contact">Contact</a>
 <a href="/all">All users</a>
 <br><br>
-<h3>This is Home page</h3>
+<h3>This is Home Page</h3>
