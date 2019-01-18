@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import ch.qos.logback.core.Context;
 @Controller
 public class starter{
 	
@@ -70,10 +72,46 @@ public class starter{
 		n.setEmail(email);
 		n.setCountry(country);
 		userRepository.save(n);
-		return "Successfully added new user ";
+		int id=n.getId();
+		return " "+id;
 		}catch(Exception e) {
 			throw new Exception(e);
 		}
 	}
 	
+	@RequestMapping(path="/remove")
+	@ResponseBody
+	public String removeuser(HttpServletRequest request) {
+		int id=  Integer.parseInt(request.getParameter("id"));
+		userRepository.deleteById(id);
+		return "Successfully deleted new user "+ id;
+	}
+	
+	@RequestMapping(path="/edit")
+	@ResponseBody
+	public String edituser(HttpServletRequest request) throws Exception {
+		int id=  Integer.parseInt(request.getParameter("id"));
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+		String country = request.getParameter("country");
+		try {
+			user n = new user();
+			n.setId(id);
+			n.setName(name);
+			n.setEmail(email);
+			n.setCountry(country);
+			userRepository.save(n);
+			return "Successfully updated";
+		}catch(Exception e) {
+			throw new Exception(e);
+		}
+		
+	}
+	
 }
+
+
+
+
+
+
