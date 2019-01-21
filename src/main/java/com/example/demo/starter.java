@@ -1,9 +1,5 @@
 package com.example.demo;
 
-import java.awt.List;
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -19,6 +15,9 @@ public class starter{
 	
 	@Autowired
 	private userRepository userRepository;
+	
+	@Autowired
+	private contactRepository contactRepository;
 
 	
 	@RequestMapping("/")
@@ -102,6 +101,25 @@ public class starter{
 			n.setCountry(country);
 			userRepository.save(n);
 			return "Successfully updated";
+		}catch(Exception e) {
+			throw new Exception(e);
+		}
+		
+	}
+	
+	@RequestMapping(path="/comment")
+	public String commentuser(HttpServletRequest request) throws Exception {
+		String name = request.getParameter("name");
+		String comment = request.getParameter("comment");
+		String email = request.getParameter("email");
+		try {
+			contact con= new contact();
+			con.setName(name);
+			con.setComment(comment);
+			con.setEmail(email);
+			contactRepository.save(con);
+			request.setAttribute("Com_msg","Comment added Successfully");
+			return "welcome.jsp";
 		}catch(Exception e) {
 			throw new Exception(e);
 		}
